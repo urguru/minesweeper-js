@@ -42,9 +42,35 @@ Cell.prototype.reveal = function() {
         grid[i][j].revealed = true;
       }
     }
+    var res=document.getElementById('Game-Status').innerText='You Lose';
   }
   if (this.neighborCount == 0) {
     this.floodfill();
+  }
+  if (this.bee != true) {
+    var count=0;
+    for (var i = 0; i < cols; ++i) {
+      for (var j = 0; j < rows; ++j) {
+        if(grid[i][j].bee!=true){
+          if(grid[i][j].revealed==true)
+          {
+            count++;
+          }
+        }
+      }
+    }
+    if(count==90)
+    {
+    var res = document.getElementById('Game-Status').innerText = 'You Win';
+      for (var i = 0; i < cols; ++i) {
+        for (var j = 0; j < rows; ++j) {
+          grid[i][j].revealed = true;
+        }
+      }
+    }
+    else{
+      var res = document.getElementById('Game-Status').innerText = 'Good Move Keep Trying';
+    }
   }
 };
 
